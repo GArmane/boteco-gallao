@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% import  "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Boteco do Gallão - Bem Vindo{% endblock %}
+
+{% block page_content %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+{{ wtf.quick_form(form) }}
+
+{% endblock %}
