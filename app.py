@@ -301,8 +301,7 @@ def validate_drink_data(drink: Drink):
                   + "entre 10ml e 30ml.")
         if drink.qtdIce != 20:
             status = False
-            flash("Cuba Livre deve ter quantidades de gelo "
-                  + "entre 20ml.")
+            flash("Cuba Livre deve ter 20ml de gelo.")
         return status
     except Exception as error:
         raise
