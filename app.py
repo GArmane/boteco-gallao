@@ -224,21 +224,30 @@ def calculateIcePertinence(qtdIce):
 
 def calculatePalates(pertinences):
     weakPalate = (
-        min(pertinences.cola.weakFactor, pertinences.rum.weakFactor, pertinences.ice[0]),
-        min(pertinences.cola.weakFactor, pertinences.rum.softFactor, pertinences.ice[0]),
-        min(pertinences.cola.softFactor, pertinences.rum.weakFactor, pertinences.ice[0])
+        min(pertinences.cola.weakFactor, pertinences.rum.weakFactor,
+            pertinences.ice[0]),
+        min(pertinences.cola.weakFactor, pertinences.rum.softFactor,
+            pertinences.ice[0]),
+        min(pertinences.cola.softFactor, pertinences.rum.weakFactor,
+            pertinences.ice[0])
     )
 
     softPalate = (
-            min(pertinences.cola.strongFactor, pertinences.rum.weakFactor, pertinences.ice[0]),
-            min(pertinences.cola.softFactor, pertinences.rum.softFactor, pertinences.ice[0]),
-            min(pertinences.cola.weakFactor, pertinences.rum.strongFactor, pertinences.ice[0])
+            min(pertinences.cola.strongFactor, pertinences.rum.weakFactor,
+                pertinences.ice[0]),
+            min(pertinences.cola.softFactor, pertinences.rum.softFactor,
+                pertinences.ice[0]),
+            min(pertinences.cola.weakFactor, pertinences.rum.strongFactor,
+                pertinences.ice[0])
     )
 
     strongPalate = (
-            min(pertinences.cola.strongFactor, pertinences.rum.softFactor, pertinences.ice[0]),
-            min(pertinences.cola.strongFactor, pertinences.rum.strongFactor, pertinences.ice[0]),
-            min(pertinences.cola.softFactor, pertinences.rum.strongFactor, pertinences.ice[0])
+            min(pertinences.cola.strongFactor, pertinences.rum.softFactor,
+                pertinences.ice[0]),
+            min(pertinences.cola.strongFactor, pertinences.rum.strongFactor,
+                pertinences.ice[0]),
+            min(pertinences.cola.softFactor, pertinences.rum.strongFactor,
+                pertinences.ice[0])
     )
 
     return Palates(weakPalate, softPalate, strongPalate)
