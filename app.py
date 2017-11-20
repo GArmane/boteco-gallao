@@ -1,5 +1,5 @@
 from collections import namedtuple
-from flask import Flask, render_template
+from flask import Flask, render_template, flash, redirect, url_for
 from flask_bootstrap import Bootstrap
 from flask_wtf import Form
 from wtforms import IntegerField, RadioField, SubmitField
@@ -55,30 +55,41 @@ class Drink(object):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    form = CubaForm()
-    if form.validate_on_submit():
-        drink = Drink(form.qtdSoda.data,
-                      form.typeSoda.data,
-                      form.qtdRum.data,
-                      form.qtdIce.data)
-        pertinences = calculatePertinences(drink)
-        palates = calculatePalates(pertinences)
+    try:
+        form = CubaForm()
+        if form.validate_on_submit():
+            drink = Drink(form.qtdSoda.data,
+                          form.typeSoda.data,
+                          form.qtdRum.data,
+                          form.qtdIce.data)
+            pertinences = calculatePertinences(drink)
+            drink_valid = validate_drink_data(drink)
 
-        maximum = (max(palates.weak), max(palates.soft), max(palates.strong))
-        result = max(maximum)
+            if(drink_valid):
+                palates = calculatePalates(pertinences)
+                maximum = (max(palates.weak),
+                           max(palates.soft),
+                           max(palates.strong))
+                result = max(maximum)
 
-        category = get_category(maximum)
-        price = get_price(category)
+                category = get_category(maximum)
+                price = get_price(category)
 
-        return render_template('result.html',
-                               pertinences=pertinences,
-                               palates=palates,
-                               maximum=maximum,
-                               result=result,
-                               category=category,
-                               price=price)
-    else:
+                return render_template('result.html',
+                                       pertinences=pertinences,
+                                       palates=palates,
+                                       maximum=maximum,
+                                       result=result,
+                                       category=category,
+                                       price=price)
         return render_template('index.html', form=form)
+    except Exception as error:
+        return redirect(url_for('error_handler'))
+
+
+@app.route('/error', methods=['GET'])
+def error_handler(error_messages=list()):
+    return render_template('error.html', error_messages=error_messages)
 
 
 # Private Functions
@@ -269,6 +280,32 @@ def increasingLinear(factor: float, lowerBound: float, upperBound: float):
 
 def decreasingLinear(factor: float, lowerBound: float, upperBound: float):
     return (upperBound - factor) / (upperBound - lowerBound)
+
+
+def validate_drink_data(drink: Drink):
+    try:
+        status = True
+        if drink.typeSoda == 'coke' and (drink.qtdSoda < 50
+                                         or drink.qtdSoda > 60):
+            status = False
+            flash("Drinks com Coca-cola devem ter quantidades "
+                  + "entre 50ml e 60ml.")
+        if drink.typeSoda == 'pepsi' and (drink.qtdSoda < 60
+                                          or drink.qtdSoda > 70):
+            status = False
+            flash("Drinks com Pepsi devem ter quantidades "
+                  + "entre 60ml e 70ml.")
+        if drink.qtdRum < 10 or drink.qtdRum > 30:
+            status = False
+            flash("Cuba Livre deve ter quantidades de rum "
+                  + "entre 10ml e 30ml.")
+        if drink.qtdIce != 20:
+            status = False
+            flash("Cuba Livre deve ter quantidades de gelo "
+                  + "entre 20ml.")
+        return status
+    except Exception as error:
+        raise
 
 
 def main():
