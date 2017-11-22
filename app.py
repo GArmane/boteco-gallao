@@ -13,7 +13,9 @@ bootstrap = Bootstrap(app)
 
 # Classes
 
-## Classes do tipo ABC
+# Classes do tipo ABC
+
+
 Pertinence = namedtuple('Pertinence', ['weakFactor',
                                        'softFactor',
                                        'strongFactor'])
@@ -24,7 +26,9 @@ Palate = tuple()
 
 Palates = namedtuple('Palates', ['weak', 'soft', 'strong'])
 
-## Classes padrão
+# Classes padrão
+
+
 class CubaForm(Form):
     qtdSoda = IntegerField('Quantidade de refrigerante:', validators=[
                                                             Required()])
@@ -108,7 +112,6 @@ def calculatePertinences(drink: Drink) -> tuple:
     rumPertinence = calculateRumPertinence(drink.qtdRum)
     icePertinence = calculateIcePertinence(drink.qtdIce)
     return Pertinences(colaPertinence, rumPertinence, icePertinence)
-
 
 
 def calculateCokePertinence(qtdSoda: int) -> Pertinence:
@@ -326,10 +329,10 @@ def calculatePalates(pertinences) -> Palates:
 
 def get_category(maximum: tuple) -> str:
     '''
-    Retorna a categoria do paladar com base nos valores calculados pela fórmula
-    utilizando os máximos. Função retorna o maior valor em uma lista de valores,
-    invertendo a lista para sempre selecionar último maior valor em caso de
-    empate.
+    Retorna a categoria do paladar com base nos valores calculados pela 
+    fórmula utilizando os máximos. Função retorna o maior valor em uma 
+    lista de valores, invertendo a lista para sempre selecionar último 
+    maior valor em caso de empate.
 
     Parâmetros:
         maximum: tuple -> lista com os máximos dos valores cálculados para
@@ -356,7 +359,9 @@ def get_price(category: str) -> float:
     return prices.get(category)
 
 
-def increasingLinear(factor: float, lowerBound: float, upperBound: float) -> float:
+def increasingLinear(factor: float,
+                     lowerBound: float,
+                     upperBound: float) -> float:
     '''
     Calcula o coeficiênte linear crescente.
 
@@ -371,7 +376,9 @@ def increasingLinear(factor: float, lowerBound: float, upperBound: float) -> flo
     return (factor - lowerBound) / (upperBound - lowerBound)
 
 
-def decreasingLinear(factor: float, lowerBound: float, upperBound: float) -> float:
+def decreasingLinear(factor: float,
+                     lowerBound: float,
+                     upperBound: float) -> float:
     '''
     Calcula o coeficiênte linear decrescente.
 
