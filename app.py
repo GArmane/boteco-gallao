@@ -5,7 +5,7 @@ from flask_wtf import Form
 from wtforms import IntegerField, RadioField, SubmitField
 from wtforms.validators import Required
 
-
+# Inicialização e configuração do Flask
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'gallao'
 bootstrap = Bootstrap(app)
@@ -13,6 +13,7 @@ bootstrap = Bootstrap(app)
 
 # Classes
 
+## Classes do tipo ABC
 Pertinence = namedtuple('Pertinence', ['weakFactor',
                                        'softFactor',
                                        'strongFactor'])
@@ -23,7 +24,7 @@ Palate = tuple()
 
 Palates = namedtuple('Palates', ['weak', 'soft', 'strong'])
 
-
+## Classes padrão
 class CubaForm(Form):
     qtdSoda = IntegerField('Quantidade de refrigerante:', validators=[
                                                             Required()])
@@ -50,7 +51,7 @@ class Drink(object):
                     self.qtdSoda, self.typeSoda, self.qtdRum, self.qtdIce)
 
 
-# Routes
+# Rotas
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -92,10 +93,14 @@ def error_handler(error_messages=list()):
     return render_template('error.html', error_messages=error_messages)
 
 
-# Private Functions
-
-
 def calculatePertinences(drink: Drink) -> tuple:
+    '''
+    Calcula os graus de pertinência sobre um drink.
+
+    Parâmetros:
+        drink: Drink -> objeto Drink que encapsula os dados necessários
+        para processamento.
+    '''
     if(drink.typeSoda == 'coke'):
         colaPertinence = calculateCokePertinence(drink.qtdSoda)
     else:
@@ -105,7 +110,20 @@ def calculatePertinences(drink: Drink) -> tuple:
     return Pertinences(colaPertinence, rumPertinence, icePertinence)
 
 
+
 def calculateCokePertinence(qtdSoda: int) -> Pertinence:
+    '''
+    Calcula o grau de pertinência de coca-cola sobre
+    um drink.
+
+    Parâmetros:
+        qtdSoda: integer -> quantidade de coca-cola
+        no drink.
+
+    Retornos:
+        Pertinence(weakFactor, SoftFactor, strongFactor) -> Fatores calculados
+        para paladar fraco, suave e forte.
+    '''
     try:
         # Cálculo pertinência fraca
         if qtdSoda < 56 or qtdSoda > 60:
@@ -146,6 +164,18 @@ def calculateCokePertinence(qtdSoda: int) -> Pertinence:
 
 
 def calculatePepsiPertinence(qtdSoda: int) -> Pertinence:
+    '''
+    Calcula o grau de pertinência de pepsi sobre
+    um drink.
+
+    Parâmetros:
+        qtdSoda: integer -> quantidade de pepsi
+        no drink.
+
+    Retornos:
+        Pertinence(weakFactor, SoftFactor, strongFactor) -> Fatores calculados
+        para paladar fraco, suave e forte.
+    '''
     try:
         # Cálculo pertinência fraca
         if qtdSoda < 66 or qtdSoda > 70:
@@ -183,7 +213,19 @@ def calculatePepsiPertinence(qtdSoda: int) -> Pertinence:
         raise
 
 
-def calculateRumPertinence(qtdRum: int):
+def calculateRumPertinence(qtdRum: int) -> Pertinence:
+    '''
+    Calcula o grau de pertinência de rum sobre
+    um drink.
+
+    Parâmetros:
+        qtdRum: integer -> quantidade de rum
+        no drink.
+
+    Retornos:
+        Pertinence(weakFactor, SoftFactor, strongFactor) -> Fatores calculados
+        para paladar fraco, suave e forte.
+    '''
     try:
         # Cálculo pertinência fraca
         if qtdRum < 10 or qtdRum > 20:
@@ -223,7 +265,18 @@ def calculateRumPertinence(qtdRum: int):
         raise
 
 
-def calculateIcePertinence(qtdIce):
+def calculateIcePertinence(qtdIce) -> Pertinence:
+    '''
+    Calcula o grau de pertinência de gelo sobre
+    um drink.
+
+    Parâmetros:
+        qtdIce: integer -> quantidade de gelo no drink.
+
+    Retornos:
+        Pertinence(weakFactor, SoftFactor, strongFactor) -> Fatores calculados
+        para paladar fraco, suave e forte.
+    '''
     try:
         if qtdIce == 20:
             return 1,
@@ -233,7 +286,14 @@ def calculateIcePertinence(qtdIce):
         raise
 
 
-def calculatePalates(pertinences):
+def calculatePalates(pertinences) -> Palates:
+    '''
+    Calcula os fatores para paladares com base na fórmula dos mínimos.
+
+    Parâmetros:
+        pertinences: Pertinences -> pertinências calculadas para refrigerante
+        de cola, rum e gelo.
+    '''
     weakPalate = (
         min(pertinences.cola.weakFactor, pertinences.rum.weakFactor,
             pertinences.ice[0]),
@@ -264,25 +324,76 @@ def calculatePalates(pertinences):
     return Palates(weakPalate, softPalate, strongPalate)
 
 
-def get_category(maximum: tuple):
+def get_category(maximum: tuple) -> str:
+    '''
+    Retorna a categoria do paladar com base nos valores calculados pela fórmula
+    utilizando os máximos. Função retorna o maior valor em uma lista de valores,
+    invertendo a lista para sempre selecionar último maior valor em caso de
+    empate.
+
+    Parâmetros:
+        maximum: tuple -> lista com os máximos dos valores cálculados para
+        paladares.
+
+    Retornos:
+        str -> categoria de paladar.
+    '''
     categories = ("fraco", "suave", "forte")
     return categories[len(maximum) - 1 - maximum[::-1].index(max(maximum))]
 
 
-def get_price(category: str):
+def get_price(category: str) -> float:
+    '''
+    Retorna o preço da categoria de paladar.
+
+    Parâmetros:
+        category: str -> categoria de paladar.
+
+    Retornos:
+        float -> preço de uma categoria.
+    '''
     prices = {'fraco': 15.0, 'suave': 20.0, 'forte': 25.0}
     return prices.get(category)
 
 
-def increasingLinear(factor: float, lowerBound: float, upperBound: float):
+def increasingLinear(factor: float, lowerBound: float, upperBound: float) -> float:
+    '''
+    Calcula o coeficiênte linear crescente.
+
+    Parâmetros:
+        factor: float -> valor base do cálculo.
+        lowerBound: float -> limite inferior do linear.
+        upperBound: float -> limite superior do linear.
+    
+    Retornos:
+        float -> coeficiênte linear crescente.
+    '''
     return (factor - lowerBound) / (upperBound - lowerBound)
 
 
-def decreasingLinear(factor: float, lowerBound: float, upperBound: float):
+def decreasingLinear(factor: float, lowerBound: float, upperBound: float) -> float:
+    '''
+    Calcula o coeficiênte linear decrescente.
+
+    Parâmetros:
+        factor: float -> valor base do cálculo.
+        lowerBound: float -> limite inferior do linear.
+        upperBound: float -> limite superior do linear.
+    
+    Retornos:
+        float -> coeficiênte linear decrescente.
+    '''
     return (upperBound - factor) / (upperBound - lowerBound)
 
 
 def validate_drink_data(drink: Drink):
+    '''
+    Valida os dados de um drink para determinar se o mesmo é Cuba Livre.
+
+    Parâmetros:
+        drink: Drink -> objeto Drink que encapsula os dados necessários
+        para processamento.
+    '''
     try:
         status = True
         if drink.typeSoda == 'coke' and (drink.qtdSoda < 50
