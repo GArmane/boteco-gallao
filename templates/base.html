@@ -15,10 +15,12 @@ type="image/x-icon">
 {% block content %}
 
 <div class="container">
-    
-    {% block page_content %}
-    {% endblock %}
-    
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            {% block page_content %}
+            {% endblock %}
+        </div>
+    </div>
 </div>
 
 {% endblock %}

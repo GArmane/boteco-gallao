@@ -6,35 +6,30 @@
 
 {% block page_content %}
 
-{% import "bootstrap/wtf.html" as wtf %}
-<div class="row">
-    <div class="col-md-4 col-md-offset-4">
-            {% for message in get_flashed_messages() %}
-            <div class="alert alert-warning">
-                <button type="button" class="close" data-dismiss="alert">
-                    &times;
-                </button>
-                {{ message }}
-            </div>
-        {% endfor %}
-        {{ wtf.quick_form(form) }}
-        <hr>
-        <div #reference-table>
-            <p>Quantidades para Cuba Livre: </p>
-            <p>
-            Coca-cola: 50ml ~ 60ml
-            Pepsi: 60ml ~ 70ml
-            </p>
-            <p>
-            Quantidades para Rum:
-            Rum: 10ml ~ 30ml
-            </p>
-            <p>
-            Quantidade para gelo:
-            Gelo: 20ml
-            </p>
-        </div>
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">
+            &times;
+        </button>
+        {{ message }}
     </div>
+{% endfor %}
+{{ wtf.quick_form(form) }}
+<hr>
+<div #reference-table>
+    <p>Quantidades para Cuba Livre: </p>
+    <p>
+    Coca-cola: 50ml ~ 60ml
+    Pepsi: 60ml ~ 70ml
+    </p>
+    <p>
+    Quantidades para Rum:
+    Rum: 10ml ~ 30ml
+    </p>
+    <p>
+    Quantidade para gelo:
+    Gelo: 20ml
+    </p>
 </div>
 
 {% endblock %}
