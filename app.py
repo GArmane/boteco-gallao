@@ -1,7 +1,7 @@
 from collections import namedtuple
 from flask import Flask, render_template, flash, redirect, url_for
 from flask_bootstrap import Bootstrap
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import IntegerField, RadioField, SubmitField
 from wtforms.validators import Required
 
@@ -29,7 +29,7 @@ Palates = namedtuple('Palates', ['weak', 'soft', 'strong'])
 # Classes padrão
 
 
-class CubaForm(Form):
+class CubaForm(FlaskForm):
     qtdSoda = IntegerField('Quantidade de refrigerante:', validators=[
                                                             Required()])
     typeSoda = RadioField(label='Tipo de refrigerante:',
@@ -403,6 +403,10 @@ def validate_drink_data(drink: Drink):
     '''
     try:
         status = True
+
+        if drink.typeSoda is None:
+            status = False
+            flash("Por favor, informe o tipo de refrigerante.")
         if drink.typeSoda == 'coke' and (drink.qtdSoda < 50
                                          or drink.qtdSoda > 60):
             status = False
