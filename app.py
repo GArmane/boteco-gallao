@@ -2,7 +2,7 @@ from collections import namedtuple
 from flask import Flask, render_template, flash, redirect, url_for
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, RadioField, SubmitField
+from wtforms import DecimalField, RadioField, SubmitField
 from wtforms.validators import Required
 
 # Inicialização e configuração do Flask
@@ -30,15 +30,15 @@ Palates = namedtuple('Palates', ['weak', 'soft', 'strong'])
 
 
 class CubaForm(FlaskForm):
-    qtdSoda = IntegerField('Quantidade de refrigerante:', validators=[
+    qtdSoda = DecimalField('Quantidade de refrigerante:', validators=[
                                                             Required()])
     typeSoda = RadioField(label='Tipo de refrigerante:',
                           choices=[
                               ('coke', 'Coca-Cola'),
                               ('pepsi', 'Pepsi')],
                           validators=[Required()])
-    qtdRum = IntegerField('Quantidade de rum:', validators=[Required()])
-    qtdIce = IntegerField('Quantidade de gelo:', validators=[Required()])
+    qtdRum = DecimalField('Quantidade de rum:', validators=[Required()])
+    qtdIce = DecimalField('Quantidade de gelo:', validators=[Required()])
     submit = SubmitField('Calcular')
 
 
