@@ -77,7 +77,6 @@ def index():
                 maximum = (max(palates.weak),
                            max(palates.soft),
                            max(palates.strong))
-                result = max(maximum)
 
                 category = get_category(maximum)
                 price = get_price(category)
@@ -86,7 +85,6 @@ def index():
                                        pertinences=pertinences,
                                        palates=palates,
                                        maximum=maximum,
-                                       result=result,
                                        category=category,
                                        price=price)
         return render_template('index.html', form=form)
