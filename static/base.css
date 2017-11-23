@@ -1,0 +1,36 @@
+
+@font-face {
+    font-family: titulo;
+    src: url(font.ttf);
+}
+
+body {
+    background-image: url("../static/bar_background.jpg");
+    background-size: cover;
+}
+
+h1 {
+    font-family: titulo;
+    text-align: center;
+    margin-top: -5px;
+    margin-bottom: 40px;
+}
+
+h2 {
+    text-align: center;
+    font-weight: bold;
+}
+
+h4 {
+    font-weight: bold;
+}
+
+hr {
+    border-color: black;
+    color: black;
+    background-color: black;
+}
+
+.jumbotron {
+    background-color: rgba(238, 238, 238, 0.8);
+}

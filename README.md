@@ -9,6 +9,10 @@ TODO:
 
 TODO:
 
+## Imagens
+![Tela inicial](print2.png)
+![Relatório](print1.png)
+
 # Recrindo ambiente de desenvolvimento
 
 TODO:

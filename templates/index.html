@@ -6,30 +6,47 @@
 
 {% block page_content %}
 
-{% for message in get_flashed_messages() %}
-    <div class="alert alert-warning">
-        <button type="button" class="close" data-dismiss="alert">
-            &times;
-        </button>
-        {{ message }}
-    </div>
-{% endfor %}
-{{ wtf.quick_form(form) }}
-<hr>
-<div #reference-table>
-    <p>Quantidades para Cuba Livre: </p>
-    <p>
-    Coca-cola: 50ml ~ 60ml
-    Pepsi: 60ml ~ 70ml
-    </p>
-    <p>
-    Quantidades para Rum:
-    Rum: 10ml ~ 30ml
-    </p>
-    <p>
-    Quantidade para gelo:
-    Gelo: 20ml
-    </p>
-</div>
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert">
+                &times;
+            </button>
+            {{ message }}
+        </div>
 
+    {% endfor %}
+
+    <br>
+    <br>
+    <br>
+    <div class="jumbotron">
+        <div class="row">
+            <h1>Boteco do Gallão</h1>
+            <hr>
+            <br>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-1">
+                {{ wtf.quick_form(form) }}
+            </div>
+            <div class="col-md-4 col-md-offset-2">
+                <div #reference-table>
+                    <h4>Quantidades para Cuba Livre:</h4>
+                        <b>Coca-cola:</b> 50ml ~ 60ml<br>
+                        <b>Pepsi:</b> 60ml ~ 70ml<br>
+                    <br>
+                    <h4>Quantidades para Rum:</h4>
+                        <b>Rum:</b> 10ml ~ 30ml<br>
+                    <br>
+                    <h4>Quantidade para gelo:</h4>
+                        <b>Gelo:</b> 20ml
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+
+    <br>
+    <br>
+        
 {% endblock %}
