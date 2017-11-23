@@ -6,51 +6,67 @@
 
 {% block page_content %}
 
-<div>
-    <h1>Relatório Cuba Livre</h1>
+<br>
+<br>
+<br>
+<div class="jumbotron">
+    <div class="row">
+        <h1>Boteco do Gallão - Resultados</h1>
+        <hr>
+        <br>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
 
-    <h2>Pertinências:</h2>
+            <h2>Pertinências:</h2>
+            <hr>
+            Pertinencia de Cola Fraca: {{pertinences.cola.weakFactor}}<br>
+            Pertinencia de Cola Suave: {{pertinences.cola.softFactor}}<br>
+            Pertinencia de Cola Forte: {{pertinences.cola.strongFactor}}<br>
 
-    Pertinencia de Cola Fraca: {{pertinences.cola.weakFactor}}<br>
-    Pertinencia de Cola Suave: {{pertinences.cola.softFactor}}<br>
-    Pertinencia de Cola Forte: {{pertinences.cola.strongFactor}}<br>
+            Pertinencia de rumFraco: {{pertinences.rum.weakFactor}}<br>
+            Pertinencia de rumSuave: {{pertinences.rum.softFactor}}<br>
+            Pertinencia de rumForte: {{pertinences.rum.strongFactor}}<br> 
 
-    Pertinencia de rumFraco: {{pertinences.rum.weakFactor}}<br>
-    Pertinencia de rumSuave: {{pertinences.rum.softFactor}}<br>
-    Pertinencia de rumForte: {{pertinences.rum.strongFactor}}<br> 
+            Pertinencia de gelo: {{pertinences.ice[0]}}<br>
+        </div>
 
-    Pertinencia de gelo: {{pertinences.ice[0]}}<br>
-</div>
+        <div class="col-md-6">
+            <h2>Paladares</h2>
+            <hr>
 
-<div>
-    <h2>Paladares</h2>
+            <div class="col-md-4">
+                <h3>Fraco: </h3>
+                Combinação 1: {{palates.weak[0]}}<br>
+                Combinação 2: {{palates.weak[1]}}<br>
+                Combinação 3: {{palates.weak[2]}}<br>
+                MAX: {{maximum[0]}}<br>
+            </div>
 
-    <h3>Fraco: </h3>
-    Combinação 1: {{palates.weak[0]}}<br>
-    Combinação 2: {{palates.weak[1]}}<br>
-    Combinação 3: {{palates.weak[2]}}<br>
-    MAX: {{maximum[0]}}<br>
+            <div class="col-md-4">
+                <h3>Suave: </h3>
+                Combinação 4: {{palates.soft[0]}}<br>
+                Combinação 5: {{palates.soft[1]}}<br>
+                Combinação 6: {{palates.soft[2]}}<br>
+                MAX: {{maximum[1]}}<br>
+            </div>
 
-    <h3>Suave: </h3>
-    Combinação 4: {{palates.soft[0]}}<br>
-    Combinação 5: {{palates.soft[1]}}<br>
-    Combinação 6: {{palates.soft[2]}}<br>
-    MAX: {{maximum[1]}}<br>
+            <div class="col-md-4">
+                <h3>Forte: </h3>
+                Combinação 7: {{palates.strong[0]}}<br>
+                Combinação 8: {{palates.strong[1]}}<br>
+                Combinação 9: {{palates.strong[2]}}<br>
+                MAX: {{maximum[2]}}<br>
+            </div>
+        </div>
 
-    <h3>Forte: </h3>
-    Combinação 7: {{palates.strong[0]}}<br>
-    Combinação 8: {{palates.strong[1]}}<br>
-    Combinação 9: {{palates.strong[2]}}<br>
-    MAX: {{maximum[2]}}<br>
-
-</div>
-
-<div>
-    <h2>Resultado Final: </h2>
-
-    Fator resultante: {{result}}<br>
-    Paladar final: {{category}}<br>
-    Preco final: {{price}}<br>
-</div>
+        <div class="col-md-3">
+            <h2>Resultados:</h2>
+            <hr>
+            Fator resultante: {{result}}<br>
+            Paladar final: {{category}}<br>
+            Preco final: {{price}}<br>
+        </div>
+    </div>
 
 {% endblock %}
