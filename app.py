@@ -44,7 +44,9 @@ class CubaForm(FlaskForm):
 
 class Drink(object):
 
-    def __init__(self, qtdSoda, typeSoda, qtdRum, qtdIce):
+    def __init__(self, qtdSoda: float,
+                 typeSoda: str, qtdRum: float,
+                 qtdIce: float):
         self.qtdSoda = qtdSoda
         self.typeSoda = typeSoda
         self.qtdRum = qtdRum
@@ -114,7 +116,7 @@ def calculatePertinences(drink: Drink) -> tuple:
     return Pertinences(colaPertinence, rumPertinence, icePertinence)
 
 
-def calculateCokePertinence(qtdSoda: int) -> Pertinence:
+def calculateCokePertinence(qtdSoda: float) -> Pertinence:
     '''
     Calcula o grau de pertinência de coca-cola sobre
     um drink.
@@ -166,7 +168,7 @@ def calculateCokePertinence(qtdSoda: int) -> Pertinence:
         raise
 
 
-def calculatePepsiPertinence(qtdSoda: int) -> Pertinence:
+def calculatePepsiPertinence(qtdSoda: float) -> Pertinence:
     '''
     Calcula o grau de pertinência de pepsi sobre
     um drink.
@@ -216,7 +218,7 @@ def calculatePepsiPertinence(qtdSoda: int) -> Pertinence:
         raise
 
 
-def calculateRumPertinence(qtdRum: int) -> Pertinence:
+def calculateRumPertinence(qtdRum: float) -> Pertinence:
     '''
     Calcula o grau de pertinência de rum sobre
     um drink.
@@ -268,7 +270,7 @@ def calculateRumPertinence(qtdRum: int) -> Pertinence:
         raise
 
 
-def calculateIcePertinence(qtdIce) -> Pertinence:
+def calculateIcePertinence(qtdIce: float) -> Pertinence:
     '''
     Calcula o grau de pertinência de gelo sobre
     um drink.
@@ -289,7 +291,7 @@ def calculateIcePertinence(qtdIce) -> Pertinence:
         raise
 
 
-def calculatePalates(pertinences) -> Palates:
+def calculatePalates(pertinences: Pertinences) -> Palates:
     '''
     Calcula os fatores para paladares com base na fórmula dos mínimos.
 
@@ -329,9 +331,9 @@ def calculatePalates(pertinences) -> Palates:
 
 def get_category(maximum: tuple) -> str:
     '''
-    Retorna a categoria do paladar com base nos valores calculados pela 
-    fórmula utilizando os máximos. Função retorna o maior valor em uma 
-    lista de valores, invertendo a lista para sempre selecionar último 
+    Retorna a categoria do paladar com base nos valores calculados pela
+    fórmula utilizando os máximos. Função retorna o maior valor em uma
+    lista de valores, invertendo a lista para sempre selecionar último
     maior valor em caso de empate.
 
     Parâmetros:
