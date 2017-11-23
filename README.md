@@ -45,23 +45,29 @@ conflitando pacotes importantes com o projeto.
 > comando por sua variante <comando>3. Ex.: python -> python3; pip -> pip3
 
 Para verificar sua versão do Python, execute o comando:
+
 `python --version`
 
 Certifique-se que esteja utilizando a versão 3.
 
 Para instalar virtualenv, execute o comando:
+
 `pip install virtualenv`
 
 Teste com o comando:
+
 `virtualenv --version`
 
 Para criar um ambiente, execute o comando:
+
 `virtualenv <nome_projeto>`
 
 Para ativar o ambiente, execute o comando:
+
 `source <nome_projeto>/bin/activate`
 
 Para desativar o ambiente, execute o comando:
+
 `deactivate`
 
 Quando ativado, o nome do ambiente (ou nome do projeto) é exibido no terminal.
@@ -79,6 +85,7 @@ instale as dependências em modo usuário do pip para evitar conflitos com outro
 projetos (caso não esteja utilizando ambientes de projeto virtualizados).
 
 Para instalar dependências em modo usuário, execute o comando:
+
 `pip install --user -r requirements.txt`
 
 Após instaladas as dependências, execute o script principal:
