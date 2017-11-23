@@ -7,7 +7,12 @@ TODO:
 
 # Sobre o programa
 
-TODO:
+Boteco do Gallão é uma aplicação web, escrita em Python, JavaScript, HTML
+e CSS, utilizando da framework Flask do Python para auxílio da construção
+de um servidor e render de páginas web.
+
+O programa tem objetivo puramente educacional, feito para matéria de 
+Inteligência Artificial na FATEC São Caetano do Sul.
 
 ## Imagens
 ![Tela inicial](print2.png)
